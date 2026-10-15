@@ -1,0 +1,35 @@
+{
+  "name": "orangehrm-automation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:login": "playwright test tests/login.spec.ts",
+    "test:employee": "playwright test tests/employee.spec.ts --grep \"Employee lifecycle\" --workers=1",
+    "test:single": "playwright test --workers=1 --headed",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.0.0",
+    "dotenv": "^17.0.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.0"
+  },
+  "scripts:test:ci": "playwright test",
+  "scripts:test:smoke": "playwright test --grep @smoke",
+  "scripts:perf:login": "k6 run performance/login.js",
+  "scripts:perf:employee": "k6 run performance/create-employee.js",
+  "scripts:format:check": "prettier --check .",
+  "scripts:test:headed": "playwright test --headed",
+  "scripts:test:debug": "playwright test --debug",
+  "scripts:test:single": "playwright test --workers=1",
+  "scripts:test:login": "playwright test tests/login.spec.ts",
+  "scripts:typecheck": "tsc --noEmit",
+  "scripts:report": "playwright show-report",
+  "scripts:report:open": "playwright show-report playwright-report"
+}
