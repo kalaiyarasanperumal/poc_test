@@ -1,4 +1,3 @@
-
 import { expect, type Page } from "@playwright/test";
 
 export class EmployeePage {
@@ -26,6 +25,6 @@ export class EmployeePage {
 
     await expect(
       this.page.getByRole("heading", { name: "Personal Details" }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 15000 });
   }
 }

@@ -28,11 +28,6 @@ test.describe("OrangeHRM Login", () => {
   });
 });
 
-
-
 // npx playwright test tests/login.spec.ts --headed
 // npx playwright test tests/login.spec.ts --reporter=html
 // npx playwright show-report
-
-
-

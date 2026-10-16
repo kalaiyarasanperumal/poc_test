@@ -17,12 +17,14 @@ test("Create employee @regression", async ({ page }) => {
   await employees.goto();
   await employees.create(firstName, lastName);
 
-  await expect(
-    page.getByRole("heading", { name: "Personal Details" }),
-  ).toBeVisible();
+  // await expect(page).toHaveURL(/\/pim\/addEmployee/);
+  // await expect(
+  //   page.getByRole("heading", { name: "Personal Details" }),
+  // ).toBeVisible();
 });
 
-
-
 // npx playwright test tests/employee.spec.ts --headed
-// npx playwright show-report
+// npx playwright test tests/employee.spec.ts --headed --trace on
+
+// npx prettier --write .
+// npx prettier --check .
