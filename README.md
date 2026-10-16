@@ -1,44 +1,133 @@
-# Senior QA Automation Engineer Technical Test
+# OrangeHRM Automation Testing
 
-A simple automation framework using Playwright, TypeScript, API testing, GitHub Actions, HTML reports, and k6 performance testing.
+## About the Project
 
-## Prerequisites
-- Node.js 20+
-- npm and Git
-- k6 (for performance testing)
-- Running application and test credentials
+This project automates the OrangeHRM demo application using Playwright and TypeScript.
+
+The goal is to test important features of the application and make sure they work as expected.
+
+**Application:** https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+
+## Tech Stack
+
+- Playwright
+- TypeScript
+- Node.js
+- Prettier
+- HTML Test Reports
+
+## Features Covered
+
+- Login with valid credentials
+- Login validation with invalid credentials
+- Validation for empty login fields
+- Employee creation
+- Page Object Model (POM) for reusable code
+- Automated test execution and HTML reporting
+
+## Project Structure
+
+```text
+poc_test/
+├── src/
+│   └── pages/
+│       ├── LoginPage.ts
+│       └── EmployeePage.ts
+├── tests/
+│   ├── login.spec.ts
+│   └── employee.spec.ts
+├── playwright.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 ## Setup
+
+Make sure Node.js is installed.
+
+Clone the repository:
+
+```bash
+git clone https://github.com/kalaiyarasanperumal/poc_test.git
+cd poc_test
+```
+
+Install dependencies:
+
 ```bash
 npm install
-npx playwright install --with-deps chromium
-cp .env.example .env
+npx playwright install
 ```
-
-Update `.env` with the application URL and credentials.
 
 ## Run Tests
+
+Run all tests:
+
 ```bash
-npm test
-npm run test:smoke
-npm run test:headed
-npm run test:debug
-npm run report
+npx playwright test
 ```
 
-Run tests in staging:
+Run login tests:
+
 ```bash
-TEST_ENV=staging npm test
+npx playwright test tests/login.spec.ts
 ```
 
-## Test Tags
-- `@smoke` – Basic checks
-- `@regression` – Full functional tests
-- `@employee-lifecycle` – Create, update, and delete employees
-- `@rbac` – Role-based access tests
+Run employee tests:
 
-## Performance Testing
 ```bash
-k6 run performance/login.js
-k6 run performance/create-employee.js
+npx playwright test tests/employee.spec.ts
 ```
+
+Run tests in headed mode:
+
+```bash
+npx playwright test --headed
+```
+
+Check TypeScript errors:
+
+```bash
+npx tsc --noEmit
+```
+
+## Test Report
+
+Generate an HTML report:
+
+```bash
+npx playwright test --reporter=html
+```
+
+Open the report:
+
+```bash
+npx playwright show-report
+```
+
+The report shows the test results and helps identify failed test cases.
+
+## Framework Approach
+
+The project uses the Page Object Model to keep page actions separate from test cases.
+
+- `LoginPage.ts` contains login-related actions.
+- `EmployeePage.ts` contains employee-related actions.
+- The `tests` folder contains the test scenarios.
+
+This structure makes the code easier to read, maintain, and extend.
+
+## Future Improvements
+
+- Add employee update and deletion tests.
+- Add API testing and verification.
+- Improve failure screenshots and test reporting.
+- Integrate automated tests with a CI/CD pipeline.
+- Add performance testing using k6.
+
+## Author
+
+Kalaiyarasan Perumal
+
+GitHub: https://github.com/kalaiyarasanperumal

@@ -1,18 +1,38 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { LoginPage } from "../src/pages/LoginPage";
 
-import { config } from "../src/config/env";
-// import { config } from "../src/config/config";
+test.describe("OrangeHRM Login", () => {
+  test("Successful login @smoke", async ({ page }) => {
+    const login = new LoginPage(page);
 
-test("Valid login", async ({ page }) => {
-  const login = new LoginPage(page);
+    await login.goto();
+    await login.login("Admin", "admin123");
+    await login.verifyLoginSuccess();
+  });
 
-  await login.login(config.username, config.password);
-  await login.verifyLogin();
+  test("Invalid login shows an error", async ({ page }) => {
+    const login = new LoginPage(page);
+
+    await login.goto();
+    await login.login("InvalidUser", "WrongPassword");
+    await login.verifyInvalidLogin();
+  });
+
+  test("Empty credentials show validation errors", async ({ page }) => {
+    const login = new LoginPage(page);
+
+    await login.goto();
+    await page.getByRole("button", { name: "Login" }).click();
+
+    await expect(page.getByText("Required").first()).toBeVisible();
+  });
 });
 
-test("Invalid login", async ({ page }) => {
-  const login = new LoginPage(page);
 
-  await login.login("invalid-user", "invalid-password");
-});
+
+// npx playwright test tests/login.spec.ts --headed
+// npx playwright test tests/login.spec.ts --reporter=html
+// npx playwright show-report
+
+
+
